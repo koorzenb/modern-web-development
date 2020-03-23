@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Welcome | Shanaaz</title>
+</head>
+<style>
+    html, body {
+        font-family: 'Roboto', sans-serif;
+        padding: 0;
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+    }
+    .wrapper {
+        display: grid;
+        grid-template-columns: auto 25%;
+        grid-template-rows: 10% auto 10%;
+        grid-template-areas:
+            "header header"
+            "content aside"
+            "footer footer";
+        height: 100vh;
+    }
+    header, main, aside, footer {
+        display: grid;
+        justify-content: center;
+        align-content: center;
+    }
+    header {
+        background: #0081ff;
+        grid-area: header;
+        
+    }
+    main {
+        background: #ff8500; 
+    }
+    aside {
+        background: black;
+        color: #ffffff;
+        grid-area: aside;
+    }
+    footer {
+        background: #0081ff;
+        grid-area: footer;
+    }
+</style>
+<body>
+    <div class="wrapper">
+        <header>Header</header>
+        <main>Main</main>
+        <aside>Aside</aside>
+        <footer>Footer</footer>
+    </div>
+</body>
+</html>
