@@ -1,14 +1,13 @@
-# Javascript (Project 6)
+# Javascript (Project 6) - Promises
 
 ## Introduction
 
-This is a basic javascript project built for training purposes.
+This is a simple javascript content manager built for training purposes.
 
 ## Overview
 This project contains 1 exercise. 
 
-Exercise 3: 
-This exercise aims to display skills at javascript classes, es6, object oriented programming, inheritance, seperation of concern.
+Exercise 4: 
+This exercise aims to display skills at javascript classes, es6, seperation of concern, but most importantly an understanding of Promises and Async/Await.
 
-It contains 4 classes: Person, People, MileyCyrus and JoeDirt. A Person has all common properties i.e name, surname and lastname. People extends Person with the functionality common to all Person instances e.g start walking, stop walking. A MileyCyrus class then extends the People class by giving it it's unique instance characteristics i.e instance name, instance status.
-
+The Content Manager class receives an array of files. When it's download functionality is triggered, it will download all files, pass them on to be processed and then render the processed result to the screen.
