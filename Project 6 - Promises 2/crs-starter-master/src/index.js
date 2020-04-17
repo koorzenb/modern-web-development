@@ -11,17 +11,21 @@ async function download () {
    return data;
  }
 
+ //BK - why async function?
  async function process(data) {
    let template = document.createElement('template');
    for (const item of data) {
       content.innerHTML += item;
    }
 
+   //BK - why await?
    await render(template);
 }
 
+// BK - Why await?
  async function render (template) {
     const wrapper = document.querySelector('#content');
+    // BK - template != template literal. See Rabie spec
     wrapper.append(template.content.cloneNode(true));
  }
  
