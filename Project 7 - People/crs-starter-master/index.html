@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Persona Manager</title>
+    <style>
+        .stop {
+            color: red;
+        }
+        .start {
+            color: green;
+        }
+    </style></head>
+<body>
+    <script src="src/index.js" type="module"></script>
+    <div id='controls'>
+        <label for="firstName">First Name</label>
+        <input id="firstName" name="firstName" type="text">
+
+        <label for="lastName">Last Name</label>
+        <input id="lastName" name="firstName" type="text">
+
+        <label for="age">Age</label>
+        <input id="age" name="age" type="text">
+
+        <button id="create" disabled>Create person</button>
+        <button id="start" disabled>Walk person</button>
+        <button id="stop" disabled>Stop person</button>    
+    </div>
+
+    <div id="status"></div>
+</body>
+</html>
