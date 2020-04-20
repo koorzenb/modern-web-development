@@ -9,14 +9,16 @@ export async function download (files) {
     
     return data;
   }
- 
-export function process(data) {
-    for (const item of data) {
-       render(item);
-    }
- }
- 
-export function render (item) {
-     const wrapper = document.querySelector('#content');
-     wrapper.innerHTML = `${wrapper.innerHTML += item} <br /><br />`;
-  }
+
+ export function process(data) {
+   const processData = data.map(item => {
+      return `<li>${item}</li>`;
+   });
+
+   render(processData);
+}
+
+export function render (data) {
+    const wrapper = document.querySelector('#content');
+    wrapper.innerHTML = `${data.join('\n')}`;
+}
