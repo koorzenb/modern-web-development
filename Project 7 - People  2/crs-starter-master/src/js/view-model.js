@@ -1,7 +1,7 @@
 import {Person} from "./person.js";
 
 /**
- * Get a handle on a form containing inputs and buttons. Consider all the inputs required, find create, start and stop buttons and add dynamic eventlisteners to manage creation of a Person as well as a it's ability to walk.
+ * Get a handle on a form containing inputs and buttons. Validate all the inputs required, find create, start and stop buttons and add dynamic eventlisteners to manage creation of a Person as well as a it's ability to walk.
  */
 export class ViewModel {
 
@@ -18,29 +18,50 @@ export class ViewModel {
      * Dispose memory
      */
     dispose() {
-        this._clickHandler = null;
-        this.requiredFields = null;
-        this.buttons = null;
+        for (const field of this._requiredFields) {
+            field.removeEventListener('focusout', this._requiredFieldsFocusHandler);
+        }
 
-        if(this.person != null) {
-            this.person.dispose();
-            this.person = null;
+        for (const button of this._buttons) {
+            button.removeEventListener('click', this._clickHandler);
+        }
+
+        this._requiredFields = null;
+        this._clickHandler = null;
+        this._buttons = null;
+        this._form = null;
+
+        if(this._person != null) {
+            this._person.dispose();
+            this._person = null;
         }
 
         super.dispose();
     }
 
     /**
+     * Handle focus out event for required fields
+     */
+    requiredFieldFocus() {
+        this.validate();
+    }
+
+    /**
      * Initial setup
      */
     _setup() {
-        const form = document.querySelector('#controls');
-        this.requiredFields = document.querySelectorAll('#controls input');
+        this._form = document.querySelector('#controls');
+        this._buttons = this._form.querySelectorAll('button');
+        this._requiredFields = document.querySelectorAll('#controls input');
+        this._requiredFieldsFocusHandler = this.requiredFieldFocus.bind(this);
 
-        for (const field of this.requiredFields) {
-            field.addEventListener('focusout', () => {
-                this.validate(form);
-            });
+        for (const button of this._buttons) {
+            this.disable(button);
+        }
+        
+       
+        for (const field of this._requiredFields) {
+            field.addEventListener('focusout', this._requiredFieldsFocusHandler);
         }
     }
 
@@ -52,15 +73,15 @@ export class ViewModel {
         const lastName = document.getElementById("lastName");
         const age = document.getElementById("age");
 
-        for (const input of this.requiredFields) {
+        for (const input of this._requiredFields) {
             this.disable(input)
         }
 
-        for (const button of this.buttons) {                
+        for (const button of this._buttons) {                
             button.getAttribute('id') === "create" ? this.disable(button) : this.enable(button);
         }
         
-        this.person = new Person(firstName.value, lastName.value, age.value);
+        this._person = new Person(firstName.value, lastName.value, age.value);
     }
 
     /**
@@ -68,7 +89,7 @@ export class ViewModel {
     * Call Persons walk method with a parameter of true
     */
     start() {
-        this.person.walk(true);        
+        this._person.walk(true);        
     }
 
     /**
@@ -76,25 +97,24 @@ export class ViewModel {
      * Call Persons walk method with a parameter of false
      */
     stop() {
-        this.person.walk(false);        
+        this._person.walk(false);        
     }
 
     /**
      * Handle validation logic
      * If all inputs are filled in, enable create button and addEventlisteners
      */
-    validate(form) {
+    validate() {
         const valid = [];
-        this.buttons = form.querySelectorAll('button');
 
-        for (const input of this.requiredFields) {
+        for (const input of this._requiredFields) {
             if(input.value != '') {
                 valid.push(input);
             }            
         }
     
-        for (const button of this.buttons) {
-            if (valid.length === this.requiredFields.length) {
+        for (const button of this._buttons) {
+            if (valid.length === this._requiredFields.length) {
                 if(button.getAttribute('id') === "create") this.enable(button);
                 button.addEventListener('click', this._clickHandler);
             }
@@ -119,7 +139,6 @@ export class ViewModel {
     disable(element) {
         element.setAttribute('disabled', 'disabled');
     }
-
 
     /**
      * Handle click event
