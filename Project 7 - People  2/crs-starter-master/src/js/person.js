@@ -4,21 +4,13 @@ import { People } from "./people.js";
  * Construct a Person instance. Manage it's ability to walk.
  */
 export class Person extends People{
-    get isWalking() {
-         return this._isWalking || false;
-    }
-
-    set isWalking(newValue) {
-        this._isWalking = newValue;
-    }
-
     get status() {
-        return  `${this.firstName} ${this.lastName} ${this.isWalking === true ? "is walking" : "is idle"}.`;
+        return  `${this.firstName} ${this.lastName} ${this._isWalking === true ? "is walking" : "is idle"}.`;
     }
 
-    set status(newValue) {
-        this._status = newValue;
-    }
+    // set status(newValue) {
+    //     this._status = newValue;
+    // }
 
     /**
      * @constructor
@@ -28,7 +20,6 @@ export class Person extends People{
      */
     constructor(firstName, lastName, age) {
         super(firstName, lastName, age);
-
         this._statusWrapper = document.querySelector('#status');
     }
 
@@ -36,10 +27,12 @@ export class Person extends People{
      * Dispose memory
      */
     dispose() {
-        this.isWalking = null;
+        if(this._isWalking != null) {
+            this._isWalking = null
+        }
+        
         this.status = null;
         this._statusWrapper = null;
-
         super.dispose();
     }
 
