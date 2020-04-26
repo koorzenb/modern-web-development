@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+body * {
+    margin: 10px 0 0 0;
+}
+
+*:focus {
+    outline: none;
+    border:  1px solid deeppink;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    padding: 20px;
+    border: 5px solid black;
+}
+
+button,
+input {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    border:  1px solid deeppink;
+}
+
+button {
+    background: deeppink;
+    padding: 10px 0;
+}
+
+input {
+    padding: 5px;
+    border:  1px solid black;
+}
+
+#status {
+    margin: 20px;
+    padding: 20px;
+    font-size: 24px;
+}
+
+.stop {
+    color: red;
+}
+
+.start {
+    color: green;
+}

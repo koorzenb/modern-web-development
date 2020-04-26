@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Person</title>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link href="src/css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <form id='controls'>
+        <label for="firstName">First Name</label>
+        <input id="firstName" name="firstName" type="text">
+
+        <label for="lastName">Last Name</label>
+        <input id="lastName" name="firstName" type="text">
+
+        <label for="age">Age</label>
+        <input id="age" name="age" type="text">
+
+        <button id="create" disabled>Create person</button>
+        <button id="start" disabled>Start walking</button>
+        <button id="stop" disabled>Stop walking</button>    
+    </form>
+
+    <div id="status" class="stop"></div>
+    <script src="src/js/index.js" type="module"></script>
+</body>
+</html>
