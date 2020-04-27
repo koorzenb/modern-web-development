@@ -8,10 +8,6 @@ export class Person extends People{
         return  `${this.firstName} ${this.lastName} ${this._isWalking === true ? "is walking" : "is idle"}.`;
     }
 
-    // set status(newValue) {
-    //     this._status = newValue;
-    // }
-
     /**
      * @constructor
      * @param {string} firstName 
