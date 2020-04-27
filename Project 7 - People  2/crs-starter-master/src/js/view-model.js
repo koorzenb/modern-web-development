@@ -40,20 +40,13 @@ export class ViewModel {
     }
 
     /**
-     * Handle focus out event for required fields
-     */
-    requiredFieldFocus() {
-        this.validate();
-    }
-
-    /**
      * Initial setup
      */
     _setup() {
         this._form = document.querySelector('#controls');
         this._buttons = this._form.querySelectorAll('button');
         this._requiredFields = document.querySelectorAll('#controls input');
-        this._requiredFieldsFocusHandler = this.requiredFieldFocus.bind(this);
+        this._requiredFieldsFocusHandler = this.validate.bind(this);
 
         for (const button of this._buttons) {
             this.disable(button);
