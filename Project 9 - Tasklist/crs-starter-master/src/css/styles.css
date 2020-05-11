@@ -1,0 +1,189 @@
+html {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 62.5%;
+}
+
+html, body {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1rem;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-rows: 5rem auto;
+    grid-template-areas:
+        "header"
+        "content";
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    grid-area: title;
+    font-size: 1.5rem;
+    padding: 0 0 0 2rem;
+}
+
+h2 {
+    color: #999999;
+    font-size: 1rem;
+    padding: 0.5rem 1rem 0.5rem 0;
+}
+
+h3 {
+    color: #666666;
+}
+
+h4 {
+    color: #333333;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+li {
+    display: grid;
+    grid-template-columns: 5% 92%;
+    grid-column-gap: 3%;
+}
+
+li:first-child .overview {
+    padding: 0 1rem 1rem 0;
+}
+
+header {
+    width: 100%;
+    background: #5223a5;
+    color: #FFFFFF;
+    border-top: 1rem solid #6c2fd8;
+    grid-area: header;
+    display: grid;
+    grid-template-columns: 5rem auto;
+    grid-template-areas: 
+        "menu title";
+    align-items: center;
+}
+
+nav {
+    padding: 0 0.5rem 0 1.75rem;
+    grid-area: menu;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    cursor: pointer;
+}
+
+svg {
+    width: 2rem;
+    height: 2rem;
+    fill: #FFFFFF;
+    pointer-events: none;
+}
+
+.content {
+    grid-area: content;
+    padding: 0 0 0 2rem;
+    overflow-y: auto;
+}
+
+.content > h2 {
+    position: fixed;
+    width: 100%;
+    background: #FFFFFF;
+    top: 5rem;
+    left: 2rem;
+}
+
+.content #tasks {
+    margin: 2.5rem 0 0 0;
+}
+
+.checkbox-wrapper {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+}
+
+.overview {
+    border-bottom: 0.1rem solid #666666;
+    padding: 1rem 1rem 1rem 0;
+}
+
+footer {
+    width: 100%;
+    padding: 1rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: flex-end;
+    box-sizing: border-box;
+}
+
+footer button {
+    border-radius: 100%;
+    background: #5223a5;
+    color: #FFFFFF;
+    border: none;
+    width: 4rem;
+    height: 4rem;
+    cursor: pointer;
+}
+
+footer button:disabled{
+    background: #5223a5;
+    color: #EEEEEE;   
+}
+
+button#close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 20px;
+    height: 20px;
+}
+
+button#close svg {
+    width: 10px;
+    height: 10px;
+}
+
+form {
+    background: #EEEEEE;
+    position: relative;
+    border: 2px solid #5223a5;
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.error {
+    border: 2px solid red;
+}
+
+input {
+    margin: 0 2rem 0 0;
+    height: 3rem;
+}
+
+label {
+    margin: 0 1rem 0 0;
+}
