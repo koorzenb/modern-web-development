@@ -4,18 +4,16 @@ html {
 }
 
 html, body {
-    position: relative;
     width: 100vw;
     height: 100vh;
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 1rem;
     padding: 0;
     margin: 0;
-    display: grid;
-    grid-template-rows: 5rem auto;
-    grid-template-areas:
-        "header"
-        "content";
+    display: flex;
+    background: #FFFFFF;
+    align-items: center;
+    justify-content: center;
 }
 
 * {
@@ -36,7 +34,7 @@ h1 {
 h2 {
     color: #999999;
     font-size: 1rem;
-    padding: 0.5rem 1rem 0.5rem 0;
+    padding: 0.5rem 1rem 0.5rem 1.5rem;
 }
 
 h3 {
@@ -44,7 +42,7 @@ h3 {
 }
 
 h4 {
-    color: #333333;
+    color: #666666;
 }
 
 ul {
@@ -61,6 +59,23 @@ li {
 
 li:first-child .overview {
     padding: 0 1rem 1rem 0;
+}
+
+.overview span {
+    color: #666666;
+}
+
+.app {
+    position: relative;
+    height: 80vh;
+    width: 40vw;
+    display: grid;
+    grid-template-rows: 5rem auto;
+    grid-template-areas:
+        "header"
+        "content";
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.1), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    background: #FFFFFF;
 }
 
 header {
@@ -96,14 +111,14 @@ svg {
     grid-area: content;
     padding: 0 0 0 2rem;
     overflow-y: auto;
+    background: #FFFFFF;
 }
 
 .content > h2 {
-    position: fixed;
+    position: absolute;
     width: 100%;
-    background: #FFFFFF;
     top: 5rem;
-    left: 2rem;
+    left: 0;
 }
 
 .content #tasks {
@@ -131,6 +146,7 @@ footer {
     display: flex;
     justify-content: flex-end;
     box-sizing: border-box;
+    box-shadow: 0 10px 6px -6px #777;
 }
 
 footer button {
@@ -167,6 +183,7 @@ form {
     border: 2px solid #5223a5;
     padding: 1rem;
     display: flex;
+    width: 100%;
     justify-content: flex-end;
     align-items: center;
 }

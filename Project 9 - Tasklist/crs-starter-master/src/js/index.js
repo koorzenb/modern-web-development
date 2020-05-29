@@ -1,3 +1,8 @@
 import {ViewModel} from "./view-model.js";
 
-new ViewModel();
+const viewModel = new ViewModel();
+
+window.addEventListener("unload", () => {
+    viewModel.dispose();
+}, { once: true });
+

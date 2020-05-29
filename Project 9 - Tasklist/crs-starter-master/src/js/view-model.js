@@ -1,4 +1,5 @@
-import {Todo} from "./todo.js";
+import {Task} from "./task.js";
+import {Store} from "./store.js";
 
 /**
  * Get a handle on a footer containing inputs and buttons. Assign relevant click and focus event handlers and validate and control ui behaviour based on required conditions.
@@ -11,6 +12,11 @@ export class ViewModel {
     constructor() {
         this._clickHandler = this._click.bind(this);
         this._setup();
+        this.store = Store.createStore("MyTasks");
+        
+        if(this.store.data.length > 0) {
+            this.render(this.store.data);
+        }
     }
 
     /**
@@ -30,12 +36,12 @@ export class ViewModel {
         this._buttons = null;
         this._form = null;
 
-        if(this._todo != null) {
-            this._todo.dispose();
-            this._todo = null;
+        if(this._task != null) {
+            this._task.dispose();
+            this._task = null;
         }
 
-        this._todoList = null;
+        this._taskList = null;
 
         super.dispose();
     }
@@ -47,11 +53,11 @@ export class ViewModel {
         const footer = document.querySelector('footer');
         this._form = footer.querySelector('form');
         this._buttons = footer.querySelectorAll('button');
-        this._todoList = document.querySelector('#tasks ul');
+        this._taskList = document.querySelector('#tasks ul');
         this._requiredFields = document.querySelectorAll('#controls input');
 
         const listClickHandler = this._listClick.bind(this);
-        this._todoList.addEventListener('click', listClickHandler);
+        this._taskList.addEventListener('click', listClickHandler);
         
         this._requiredFieldsFocusHandler = this.validate.bind(this);
 
@@ -83,21 +89,43 @@ export class ViewModel {
      */
     _listClick(e) {
         if(e.target.classList.contains('completed-checkbox')) {
-            if(e.target.checked === true) {
-                console.log("mark item as complete");
-                this._todo.complete(true);
-            }
-            else {
-                console.log("mark item as incomplete");
-                this._todo.complete(false);
-            }
+            const overview = e.target.parentElement.nextElementSibling;
+            const title = overview.querySelector('h4').innerText;
+            const task = this.store.findByTitle(title);
+            task.isComplete = e.target.checked;
+            console.log(task);
         }
     }
 
     /**
-     * Handle action of create button 
+     * Render items
      */
-    create(){
+    render(items) {
+        const fragment = document.createDocumentFragment();
+        
+        const template = document.querySelector('#task-template');
+        
+
+        for (const item of items) {
+            const listItem = document.createElement('li');
+            const clone = template.content.cloneNode(true);
+            const titleElement = clone.querySelector('.overview h4');
+            const dateElement = clone.querySelector('.overview span');
+
+            titleElement.innerHTML = item.title;
+            dateElement.innerHTML = new Date(item.date).toDateString();
+
+            listItem.appendChild(clone);
+            fragment.appendChild(listItem);
+        }
+
+        this._taskList.appendChild(fragment);
+    }
+
+    /**
+     * Handle action of add button 
+     */
+    add(){
         this.validate();
 
         if (this._valid.length !== this._requiredFields.length) return;
@@ -105,10 +133,13 @@ export class ViewModel {
         const title = document.getElementById("title");
         const date = document.getElementById("date");
 
-        this._todo = new Todo(title.value, date.value);
+        this._task = new Task(title.value, date.value);
+        this.store.data.push(this._task);
+        this.store.datasource.save();
+
         const fragment = document.createDocumentFragment();
         const item = document.createElement('li');
-        const template = document.querySelector('#todo-item-template');
+        const template = document.querySelector('#task-template');
         const clone = template.content.cloneNode(true);
 
         const titleElement = clone.querySelector('.overview h4');
@@ -119,10 +150,10 @@ export class ViewModel {
 
         item.appendChild(clone);
         fragment.appendChild(item);
-        this._todoList.appendChild(fragment);
+        this._taskList.appendChild(fragment);
 
-        // title.innerHTML = "";
-        // date.innerHTML = "";
+        title.value = "";
+        date.value = "2020-05-01";
         this.close();
     }
 
@@ -139,7 +170,6 @@ export class ViewModel {
             }
         }
     }
-
 
     /**
     * Handle action of open button 
@@ -167,14 +197,14 @@ export class ViewModel {
                 this._valid.push(input);
 
                 for (const button of this._buttons) {                
-                    if(button.getAttribute('id') === "create") button.removeAttribute('disabled');
+                    if(button.getAttribute('id') === "add") button.removeAttribute('disabled');
                 }
             }
             else {
                 input.classList.add('error');
 
                 for (const button of this._buttons) {                
-                    if(button.getAttribute('id') === "create") button.setAttribute('disabled', 'disabled');
+                    if(button.getAttribute('id') === "add") button.setAttribute('disabled', 'disabled');
                 }
             }          
         }
