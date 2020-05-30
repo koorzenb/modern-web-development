@@ -10,6 +10,7 @@ export class ViewModel {
      * @constructor
      */
     constructor() {
+        debugger;
         this._clickHandler = this._click.bind(this);
         this._setup();
         this.store = Store.createStore("MyTasks");
@@ -56,6 +57,7 @@ export class ViewModel {
         this._taskList = document.querySelector('#tasks ul');
         this._requiredFields = document.querySelectorAll('#controls input');
 
+        // clean up
         const listClickHandler = this._listClick.bind(this);
         this._taskList.addEventListener('click', listClickHandler);
         
@@ -93,7 +95,7 @@ export class ViewModel {
             const title = overview.querySelector('h4').innerText;
             const task = this.store.findByTitle(title);
             task.isComplete = e.target.checked;
-            console.log(task);
+            console.log(task);      //clean up
         }
     }
 

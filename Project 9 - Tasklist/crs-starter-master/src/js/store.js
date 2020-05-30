@@ -16,6 +16,7 @@ export class Store {
         this._data = newValue;
     }
 
+    // interesting pattern for newing up an instance. NOt sure if you should clean up this instance afterwards?
     static createStore(key) {
         const store = new Store(key);
         return store;
@@ -60,6 +61,7 @@ export class Store {
         }
         window.localStorage.setItem(this.key, JSON.stringify(data));
 
+        //remove logs
         console.log(data);
     }
     
