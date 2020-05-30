@@ -1,6 +1,7 @@
 import {Persona} from "./persona.js";
 
 export class PersonaManager extends Persona {
+    // BK - remember to dispose
     get firstNameInput() {
         if (this._firstNameInput == null) {
             this._firstNameInput = document.querySelector("#firstName").value;
@@ -12,6 +13,7 @@ export class PersonaManager extends Persona {
         this._firstNameInput = newValue;
     }
 
+    // BK - remember to dispose
     get lastNameInput() {
         if (this._lastNameInput == null) {
             this._lastNameInput = document.querySelector("#lastName").value;
@@ -23,6 +25,7 @@ export class PersonaManager extends Persona {
         this._ageInput = newValue;
     }
 
+    // BK - remember to dispose
     get ageInput() {
         if (this._ageInput == null) {
             this._ageInput = document.querySelector("#age").value;
